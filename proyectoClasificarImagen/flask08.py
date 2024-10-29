@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 from werkzeug.utils import secure_filename
 import numpy as np
 import tensorflow as tf
@@ -21,6 +21,10 @@ image_size = (180, 180)  # Ajusta esto según lo que tu modelo requiera
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+
+@app.route('/')
+def index():
+    return render_template('upload.html')  
 
 @app.route('/uploader', methods=['POST'])
 def upload_file():
